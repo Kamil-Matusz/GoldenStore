@@ -1,4 +1,4 @@
-﻿namespace GoldenStore.Data
+﻿namespace GoldenStore.Models
 {
 
     public class MetalModels
