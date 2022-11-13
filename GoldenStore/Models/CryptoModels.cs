@@ -3,7 +3,7 @@
 namespace GoldenStore.Models
 {
 
-    public class Rootobject
+    public class CryptoModel
     {
         public CryptoInfo[] info { get; set; }
     }
