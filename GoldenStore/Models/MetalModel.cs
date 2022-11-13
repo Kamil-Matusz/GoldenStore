@@ -1,13 +1,13 @@
 ﻿namespace GoldenStore.Models
 {
 
-    public class MetalModels
+    public class MetalModel
     {
         public bool success { get; set; }
         public int timestamp { get; set; }
         public string date { get; set; }
         public string _base { get; set; }
-        public Rates rates { get; set; }
+        public Rates[] rates { get; set; }
         public string unit { get; set; }
     }
 

@@ -6,16 +6,49 @@
 
 <h3>MetalData</h3>
 
+@if (string.IsNullOrWhiteSpace(errorString) == false)
+{
+        <div class="h2">@errorString</div>
+}
+else if (metal is null)
+{
+        <div class="h4">Loading...</div>
+}
+else
+{
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Currency</th>
+                    <th>Date</th>
+                    <th>Rates</th>
+                    <th>Unit</th>
+                </tr>
+            </thead>
+            <tbody>
+             @foreach(var metals in metalModels) {
+                 <tr>
+                     <td>@metals._base</td>
+                     <td>@metals.date</td>
+                     <td>@metals.rates</td>
+                     <td>@metals.unit</td>
+                 </tr>
+             }
+            </tbody>
+        </table>
+}
+
 @code {
-    MetalModels metal;
+    MetalModel metal;
     string errorString;
+    private MetalModel[] metalModels;
 
     protected override async Task OnParametersSetAsync() {
 
         var client = _clientFactory.CreateClient();
         try
         {
-            metal = await client.GetFromJsonAsync<MetalModels>("http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=47d3795b63c43880829c7e34122c2e55");
+            metal = await client.GetFromJsonAsync<MetalModel>("https://metals-api.com/api/latest?access_key=7v69m6q813v34z8uegalu423d856m7026w58o5sqtp8v90vwylhp2bbm621l");
         }
         catch (Exception ex)
         {
