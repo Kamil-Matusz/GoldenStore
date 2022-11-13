@@ -1,7 +1,7 @@
 ﻿namespace GoldenStore.Models
 {
 
-    public class MetalModel
+    public class MetalModels
     {
         public bool success { get; set; }
         public int timestamp { get; set; }

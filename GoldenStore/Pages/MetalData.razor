@@ -1,10 +1,10 @@
-﻿@page "/Metals"
+﻿@page "/metals"
 @using System.Net.Http.Json
 @using GoldenStore.Models
 
 @inject IHttpClientFactory _clientFactory
 
-<h3>MetalData</h3>
+<h3>Information on raw material prices</h3>
 
 @if (string.IsNullOrWhiteSpace(errorString) == false)
 {
@@ -19,19 +19,21 @@ else
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Currency</th>
-                    <th>Date</th>
-                    <th>Rates</th>
-                    <th>Unit</th>
+                    <th>Uranium</th>
+                    <th>Gal</th>
+                    <th>Bitum</th>
+                    <th>Bronz</th>
+                    <th>Steel</th>
                 </tr>
             </thead>
             <tbody>
-             @foreach(var metals in metalModels) {
+             @foreach(var metals in metal.rates) {
                  <tr>
-                     <td>@metals._base</td>
-                     <td>@metals.date</td>
-                     <td>@metals.rates</td>
-                     <td>@metals.unit</td>
+                     <td>@metals.URANIUM</td>
+                     <td>@metals.GALLIUM</td>
+                     <td>@metals.BITUMEN</td>
+                     <td>@metals.BRONZE</td>
+                     <td>@metals.STEELSC</td>
                  </tr>
              }
             </tbody>
@@ -39,16 +41,15 @@ else
 }
 
 @code {
-    MetalModel metal;
+    MetalModels metal;
     string errorString;
-    private MetalModel[] metalModels;
 
     protected override async Task OnParametersSetAsync() {
 
         var client = _clientFactory.CreateClient();
         try
         {
-            metal = await client.GetFromJsonAsync<MetalModel>("https://metals-api.com/api/latest?access_key=7v69m6q813v34z8uegalu423d856m7026w58o5sqtp8v90vwylhp2bbm621l");
+            metal = await client.GetFromJsonAsync<MetalModels>("https://metals-api.com/api/latest?access_key=7v69m6q813v34z8uegalu423d856m7026w58o5sqtp8v90vwylhp2bbm621l");
         }
         catch (Exception ex)
         {
